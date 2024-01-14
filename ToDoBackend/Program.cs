@@ -10,6 +10,9 @@ builder.Services.AddDbContext<ToDoContext>(options => {
     options.UseSqlServer("Server=.\\SQLEXPRESS;Database=ToDo;Trusted_Connection=true;Encrypt=False;");
 });
 
+builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -20,6 +23,13 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
