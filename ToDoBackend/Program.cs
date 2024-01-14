@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ToDoBackend.data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<ToDoContext>(options => {
+    options.UseSqlServer("Server=.\\SQLEXPRESS;Database=ToDo;Trusted_Connection=true;Encrypt=False;");
+});
+
 
 var app = builder.Build();
 
