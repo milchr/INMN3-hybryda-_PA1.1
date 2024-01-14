@@ -17,15 +17,34 @@ namespace ToDoBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TodoItemDto>>> getTasks()
+        public async Task<ActionResult<List<TodoItemDto>>> getTodoItems()
         {
-            return Ok(await todoItemService.getAllTodoItems());
+            return Ok(await todoItemService.GetAllTodoItems());
         }
 
-        [HttpGet("id")]
-        public async Task<ActionResult<List<TodoItemDto>>> getTask([FromRoute] int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<TodoItemDto>>> getTodoItem([FromRoute] int id)
         {
             return Ok(await todoItemService.GetTodoItem(id));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<TodoItemDto>> createTodoItem([FromBody] TodoItemDto todoItemDto)
+        {
+            return Ok(await todoItemService.CreateTodoItem(todoItemDto));
+        }
+
+        [HttpPatch]
+        public async Task<ActionResult<TodoItemDto>> updateTodoItem([FromBody] TodoItemDto todoItemDto)
+        {
+            return Ok(await todoItemService.UpdateTodoItem(todoItemDto));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> deleteTodoItem([FromRoute] int id)
+        {
+            await todoItemService.DeleteTodoItem(id);
+            return Ok();
         }
     }
 }

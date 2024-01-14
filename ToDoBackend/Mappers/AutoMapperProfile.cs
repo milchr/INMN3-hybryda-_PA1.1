@@ -8,6 +8,7 @@ namespace ToDoBackend.mapper
     {
         public AutoMapperProfile() {
             CreateMap<TodoItemDto, TodoItem>();
+            CreateMap<TodoItem, TodoItemDto>();
         }
     }
 }

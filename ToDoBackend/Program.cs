@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoBackend.data;
+using ToDoBackend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddTransient<ITodoItemService, TodoItemService>();
 
 builder.Services.AddDbContext<ToDoContext>(options => {
     options.UseSqlServer("Server=.\\SQLEXPRESS;Database=ToDo;Trusted_Connection=true;Encrypt=False;");
@@ -34,10 +37,12 @@ app.UseSwaggerUI(options =>
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

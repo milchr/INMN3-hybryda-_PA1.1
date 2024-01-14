@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoBackend.data;
 using ToDoBackend.Dtos;
+using ToDoBackend.Exceptions;
+using ToDoBackend.Models;
 
 namespace ToDoBackend.Services
 {
@@ -16,31 +18,48 @@ namespace ToDoBackend.Services
             this.mapper = mapper;
         }
 
-        public Task<TodoItemDto> createTodoItem(TodoItemDto todoItemDto)
+        public async Task<TodoItemDto> CreateTodoItem(TodoItemDto todoItemDto)
         {
-            throw new NotImplementedException();
+            var item = mapper.Map<TodoItem>(todoItemDto);
+            await db.TodoItems.AddAsync(item);
+            await db.SaveChangesAsync();
+
+            return mapper.Map<TodoItemDto>(item);
         }
 
-        public void deleteTodoItem(int id)
+        public async Task DeleteTodoItem(int id)
         {
-            throw new NotImplementedException();
+            var item = await db.TodoItems.FindAsync(id);
+            if (item == null)
+            {
+                throw new NotFoundException("TodoItem not found");
+            }
+
+            db.TodoItems.Remove(item);
+            await db.SaveChangesAsync();
         }
 
-        public async Task<List<TodoItemDto>> getAllTodoItems()
+        public async Task<List<TodoItemDto>> GetAllTodoItems()
         {
             var items = await db.TodoItems.ToListAsync();
+
             return mapper.Map<List<TodoItemDto>>(items);
         }
 
         public async Task<TodoItemDto> GetTodoItem(int id)
         {
-            var task = await db.TodoItems.FindAsync(id);
-            return mapper.Map<TodoItemDto>(task);
+            var item = await db.TodoItems.FindAsync(id);
+
+            return mapper.Map<TodoItemDto>(item);
         }
 
-        public Task<TodoItemDto> updateTodoItem(TodoItemDto todoItemDto)
+        public async Task<TodoItemDto> UpdateTodoItem(TodoItemDto todoItemDto)
         {
-            throw new NotImplementedException();
+            var item = mapper.Map<TodoItem>(todoItemDto);
+            db.TodoItems.Update(item);
+            await db.SaveChangesAsync();
+
+            return mapper.Map<TodoItemDto>(item);
         }
     }
 }
