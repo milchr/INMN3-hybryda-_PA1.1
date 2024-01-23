@@ -1,7 +1,13 @@
+using ToDoFrontend.Clients;
+using ToDoFrontend.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<ITodoItemService, TodoItemService>();
+builder.Services.AddSingleton<RestApiClient>();
+
 
 var app = builder.Build();
 

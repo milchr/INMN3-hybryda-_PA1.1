@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ToDoBackend.Models
+namespace ToDoFrontend.Models
 {
     public class TodoItem
     {
@@ -12,9 +12,9 @@ namespace ToDoBackend.Models
 
         public TodoItem(int id, string title, string description, bool isDone)
         {
-            this.Id = id;
-            this.Title = title;
-            this.Description = description;
+            Id = id;
+            Title = title;
+            Description = description;
             this.isDone = isDone;
         }
     }

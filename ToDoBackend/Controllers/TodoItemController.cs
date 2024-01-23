@@ -19,6 +19,7 @@ namespace ToDoBackend.Controllers
         [HttpGet]
         public async Task<ActionResult<List<TodoItemDto>>> getTodoItems()
         {
+            await Console.Out.WriteLineAsync("GetAllTodoItems");
             return Ok(await todoItemService.GetAllTodoItems());
         }
 
