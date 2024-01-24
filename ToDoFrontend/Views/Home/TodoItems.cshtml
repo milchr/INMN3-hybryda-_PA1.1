@@ -4,10 +4,10 @@
     ViewData["Title"] = "View";
 }
 
-<h1>View</h1>
+<h1>Tasks</h1>
 
 <p>
-    <a asp-controller="Home" asp-action="CreateTodoItem">Create New</a>
+    <a asp-controller="Home" asp-action="CreateTodoItem">Create new task</a>
 </p>
 <table class="table">
     <thead>
@@ -37,8 +37,12 @@
                 @Html.DisplayFor(modelItem => item.isDone)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditTodoItem", item) |
-                @Html.ActionLink("Delete", "DeleteTodoItem",  new { id=item.Id } )
+                <button>
+                    @Html.ActionLink("Edit", "EditTodoItem", item)
+                 </button> |
+                <button>
+                    @Html.ActionLink("Delete", "DeleteTodoItem",  new { id=item.Id } )
+                </button>
             </td>
         </tr>
 }
