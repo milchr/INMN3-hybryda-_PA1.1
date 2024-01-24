@@ -4,18 +4,21 @@ namespace ToDoFrontend.Models
 {
     public class TodoItem
     {
-        [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Boolean isDone { get; set; }
+        public Boolean? isDone { get; set; }
 
-        public TodoItem(int id, string title, string description, bool isDone)
+        public TodoItem(int? id, string title, string description, bool? isDone)
         {
             Id = id;
             Title = title;
             Description = description;
             this.isDone = isDone;
+        }
+
+        public TodoItem()
+        {
         }
     }
 }

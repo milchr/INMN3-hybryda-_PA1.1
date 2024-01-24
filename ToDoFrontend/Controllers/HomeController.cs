@@ -32,6 +32,34 @@ namespace ToDoFrontend.Controllers
             return View(items);
         }
 
+        public async Task<IActionResult> CreateTodoItem(TodoItem todoItem)
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> EditTodoItem(TodoItem todoItem)
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> DeleteTodoItem(int id)
+        {
+            todoItemService.DeleteTodoItem(id);
+            return RedirectToAction("TodoItems");
+        }
+
+        public async Task<IActionResult> Create(TodoItem todoItem)
+        {
+            await todoItemService.CreateTodoItem(todoItem);
+            return RedirectToAction("TodoItems");
+        }
+
+        public async Task<IActionResult> Edit(TodoItem todoItem)
+        {
+            await todoItemService.EditTodoItem(todoItem);
+            return RedirectToAction("TodoItems");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
