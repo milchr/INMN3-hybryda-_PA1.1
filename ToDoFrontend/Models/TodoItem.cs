@@ -7,9 +7,9 @@ namespace ToDoFrontend.Models
         public int? Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Boolean? isDone { get; set; }
+        public Boolean isDone { get; set; }
 
-        public TodoItem(int? id, string title, string description, bool? isDone)
+        public TodoItem(int? id, string title, string description, bool isDone)
         {
             Id = id;
             Title = title;

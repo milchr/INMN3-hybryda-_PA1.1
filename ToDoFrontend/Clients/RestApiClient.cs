@@ -50,9 +50,7 @@ namespace ToDoFrontend.Clients
                 if (response.IsSuccessStatusCode)
                 {
                     todoItem = JsonConvert.DeserializeObject<TodoItem>(response.Content.ReadAsStringAsync().Result);
-                }
-                else
-                {
+                } else {
                     Console.WriteLine("error");
                 }
             });
@@ -62,7 +60,6 @@ namespace ToDoFrontend.Clients
 
         public async void DeleteTodoItem(int id)
         {
-            await Console.Out.WriteLineAsync("testtt");
             await Task.Run(() =>
             {
                 var response = client.DeleteAsync(URL + "/" + id).Result;
